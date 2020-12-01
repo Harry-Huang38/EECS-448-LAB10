@@ -18,10 +18,7 @@ if($ID == ''){
     echo "Please Do Not Leave the Text Empty";
 }
 else{
-    $query = "INSERT INTO USER_ID".
-            "(ID)".
-            "VALUES".
-            "(".$ID.")";
+    $query = "INSERT INTO USER_ID (ID) VALUES ('".$ID."')";
     
     if(!$mysqli->query($query)){
         echo "".$ID." Can not Stored in Database. The User Already Exists";
