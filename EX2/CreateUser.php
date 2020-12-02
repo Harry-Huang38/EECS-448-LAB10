@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
+    
 $database_URL = 'mysql.eecs.ku.edu';
 $my_user = 'maokunhuang';
 $my_password = 'Cohh7che';
@@ -21,7 +24,7 @@ else{
     $query = "INSERT INTO USER_ID (ID) VALUES ('".$ID."')";
     
     if(!$mysqli->query($query)){
-        echo "".$ID." Can not Stored in Database. The User Already Exists";
+        echo "User ID(".$ID.") Can not Stored in Database. The User Already Exists";
     }
     else{
         echo "New User(".$ID.") was Successfully Stored in the Database.";
