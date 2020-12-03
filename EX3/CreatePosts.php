@@ -16,7 +16,7 @@ echo "Connection Succeeded<br/>";
 
 $authorID = $_POST["authorID"];
 $content = $_POST["content"];
-$query_User = "SELECT ID FROM USER_ID";
+$query_User = "SELECT user_id FROM Users";
 $isMatch = false;
 
 
@@ -29,7 +29,7 @@ if($content == ''){
 
 if ($result = $mysqli->query($query_User)){
     while ($row = $result->fetch_assoc()) {
-        if ($row["ID"] == $authorID){
+        if ($row["user_id"] == $authorID){
             $isMatch = true;
             break;
         }
