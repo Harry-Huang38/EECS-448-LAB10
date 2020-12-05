@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <center>
+            <h1>
+                Maokun Huang
+                EECS 448 Lab-10 Exercise 7
+            </h1>
+            <h2>Delete Posts</h2>
+        </center>
+    <form action="DeletePost.php" method="POST">
+        <?php
+            $database_URL = 'mysql.eecs.ku.edu';
+            $my_user = 'maokunhuang';
+            $my_password = 'Cohh7che';
+            $database_name = 'maokunhuang';
+
+            $mysqli = new mysqli($database_URL, $my_user, $my_password, $database_name);
+            if($mysqli->connect_errno){
+                printf("Connect failed:%s\n", $mysqli->connect_error);
+                exit();
+            }
+
+            $query="SELECT * FROM Posts";
+
+            if ($result = $mysqli->query($query)) {
+            echo "<table style='text-align:center'; align = 'center' border = '1' cellpadding = '0' cellspacing='0';>";
+            echo "<tr>";
+            echo "<th style =\"background-color:#FFFFCC\"> Post ID </th>";
+            echo "<th style =\"background-color:#FFFFCC\"> Author ID </th>";
+            echo "<th style =\"background-color:#FFFFCC\"> Posts </th>";
+            echo "<th style =\"background-color:#FFFFCC\"> Delete Posts </th>";
+            echo"</tr>";
+
+                while($row = $result->fetch_assoc()) {
+                    echo "<tr>";
+                    echo "<td style =\"background-color:#6495ED\">" .$row["post_id"]. "</td>";
+                    echo "<td>" .$row["author_id"]. "</td>";
+                    echo "<td style =\"background-color:#00FFFF\">" .$row["content"]. "</td>";
+                    $temp = $row['post_id'];
+                    echo "<td><input type='checkbox' name = 'deletePost[]' value = '$temp'></td>";
+                    echo "</tr>";
+                }
+                echo "</table>";
+            }
+        ?>
+        <center>
+            <br>
+            Delete Post <input type="submit">
+        </center>
+    </form>
+    </body>
+</html>
