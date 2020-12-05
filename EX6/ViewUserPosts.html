@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Posts</title>
+</head>
+<body>
+    <center>
+        <h1>
+            Maokun Huang
+            EECS 448 Lab-10 Exercise 6
+        </h1>
+        <h2>View User Posts</h2>
+        <form action="ViewUserPosts.php" method="POST">
+            <label for="ID">Choose a User: </label>
+            <select name="ID">
+            <?php
+                error_reporting(E_ALL);
+                ini_set("display_errors", 1);
+            
+                $database_URL = 'mysql.eecs.ku.edu';
+                $my_user = 'maokunhuang';
+                $my_password = 'Cohh7che';
+                $database_name = 'maokunhuang';
+        
+                $mysqli = new mysqli($database_URL, $my_user, $my_password, $database_name);
+                if($mysqli->connect_errno){
+                    printf("Connect failed:%s\n", $mysqli->connect_error);
+                    exit();
+                }
+
+                $query_User = "SELECT user_id FROM Users";
+
+                if ($result = $mysqli->query($query_User)){
+                    while ($row = $result->fetch_assoc()) {
+                        $temp = $row['user_id'];
+                        echo "<option value='$temp' >" .$temp. "</option>";
+                    }
+                }
+                else{
+                    echo "Can not access";
+                }
+                mysqli_close($mysqli);
+                ?>
+        </select>
+        <input type="submit">
+        </from>
+    </center>
+</body>
+</html>
